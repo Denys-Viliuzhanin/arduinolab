@@ -1,4 +1,10 @@
 
+// use the following bash command to send data from PC
+// $ echo Test >> /dev/ttyUSB0
+// use the following bash command to receive data on PC
+// $ tail -f /dev/ttyUSB0
+
+
 void setup() {
 
   // set  baud rate (bits per second).
