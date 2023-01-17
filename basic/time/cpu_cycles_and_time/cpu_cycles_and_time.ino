@@ -7,7 +7,7 @@ void before_measuring() {
   TCCR1B = 1;
 
   // Time digitalWrite().
-  cli();  
+  //cli();  
 }
 
 void after_measuring() {
@@ -51,7 +51,7 @@ void measure() {
     // ===============================
     // place work here
     // ===============================
-    someWork(100000);
+    someWork(1);
     // ===============================
     uint16_t finish = measure_cpu_cycles_count();
     long currentTimeMs = millis();
@@ -78,9 +78,7 @@ void outputResults() {
 int iteration = 0;
 void loop(){
 
-    if (iteration % 3 == 0) {
-      measure() ;   
-    } else if (iteration % 3 == 1) {
+    if ((iteration % 3 == 0) || (iteration % 3 == 1)) {
       measure() ;   
     } else {
       outputResults(); 
@@ -92,13 +90,13 @@ void loop(){
     
 }
 
-#define DATA_SIZE 10*1024
+#define DATA_SIZE 1024*10
 byte data[DATA_SIZE];
 void someWork(int amountOfWork) {
   
   for(int i = 0; i < amountOfWork; i++) {
     for(int j = 0; j < DATA_SIZE; j++) {
-      data[j] = (int)j*0.003 ;//+ millis();
+      data[j] = (int)j*0.003 + millis();
     }
   }
 }
